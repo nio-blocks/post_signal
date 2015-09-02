@@ -25,7 +25,6 @@ class BuildSignal(RESTHandler):
         else:
             self._logger.error("Invalid JSON in PostSignal request body")
             return
-
         signals = [Signal(s) for s in body]
         self.notify(signals)
 
