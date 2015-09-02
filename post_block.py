@@ -28,6 +28,10 @@ class BuildSignal(RESTHandler):
         signals = [Signal(s) for s in body]
         self.notify(signals)
 
+    def on_options(self, req, rsp):
+        """Handle OPTIONS for CORS requests"""
+        pass
+
 
 @command("post", DictParameter("sig"))
 @DependsOn("nio.modules.web", "1.0.0")

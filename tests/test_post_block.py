@@ -73,3 +73,10 @@ class TestPostSignal(NIOBlockTestCase):
         request.get_body.return_value = "I'm just a string :("
         handler.on_post(request, MagicMock())
         self.assertEqual(len(self.last_notified['default']), 0)
+
+    def test_web_handler_options(self):
+        handler = BuildSignal(endpoint='',
+                              notifier=self.signals_notified,
+                              logger=MagicMock())
+        handler.on_options(MagicMock(), MagicMock())
+        self.assertEqual(len(self.last_notified['default']), 0)
