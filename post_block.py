@@ -25,9 +25,12 @@ class BuildSignal(RESTHandler):
         else:
             self._logger.error("Invalid JSON in PostSignal request body")
             return
-
         signals = [Signal(s) for s in body]
         self.notify(signals)
+
+    def on_options(self, req, rsp):
+        """Handle OPTIONS for CORS requests"""
+        pass
 
 
 @command("post", DictParameter("sig"))
