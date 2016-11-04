@@ -2,7 +2,6 @@ from nio.block.base import Block
 from nio.signal.base import Signal
 from nio.command import command
 from nio.command.params.dict import DictParameter
-from nio.util.discovery import discoverable
 from nio.properties.string import StringProperty
 from nio.properties.int import IntProperty
 from nio.modules.web import RESTHandler, WebEngine
@@ -32,7 +31,6 @@ class BuildSignal(RESTHandler):
 
 
 @command("post", DictParameter("signal"))
-@discoverable
 class PostSignal(Block):
 
     host = StringProperty(title='Host', default='0.0.0.0')
@@ -46,7 +44,7 @@ class PostSignal(Block):
 
     def configure(self, context):
         super().configure(context)
-        self._server = WebEngine.get(self.port(), self.host())
+        self._server = WebEngine.add_server(self.port(), self.host())
         self._server.add_handler(
             BuildSignal(self.endpoint(),
                         self.notify_signals,
