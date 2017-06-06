@@ -1,0 +1,7 @@
+{
+  "nio/PostSignal": {
+    "Language": "Python",
+    "Version": "1.0.0",
+    "Reference": "github.com/nio-blocks/post_signal.git@v1.0.0"
+  }
+}
