@@ -20,7 +20,8 @@ class BuildSignal(RESTHandler):
         elif isinstance(body, list):
             pass
         else:
-            self.logger.error("Invalid JSON in PostSignal request body")
+            self.logger.error(
+                "Invalid JSON in PostSignal request body: {}".format(body))
             return
         signals = [Signal(s) for s in body]
         self.notify_signals(signals)
