@@ -1,24 +1,25 @@
 {
-  "nio/PostSignal": {
-    "Commands": {},
-    "Output": "Creates a new signal for each successful POST to this block.",
-    "Version": "1.0.0",
-    "Category": "WebService",
-    "Properties": {
-      "endpoint": {
-        "description": "Endpoint at which to accept signals."
-      },
-      "port": {
-        "description": "Port to accept signals on. Defaults to 8182."
-      },
-      "host": {
-        "description": "Local IP. Defaults to 127.0.0.1."
-      }
-    },
-    "Dependencies": [
-      "-   Web Module"
-    ],
-    "Description": "Opens up a url endpoint to which you can POST json objects. These will then be output as signals.",
-    "Input": "None"
-  }
+    "nio/PostSignal": {
+        "Version": "1.0.0",
+        "Output": {
+            "Description": "Creates a new signal for each successful POST to this block."
+        },
+        "Description": "Opens up a url endpoint to which you can POST json objects. These will then be output as signals.",
+        "Input": {
+            "Description": "None"
+        },
+        "Commands": {},
+        "Category": "WebService",
+        "Properties": {
+            "endpoint": {
+                "description": "Endpoint at which to accept signals."
+            },
+            "port": {
+                "description": "Port to accept signals on. Defaults to 8182."
+            },
+            "host": {
+                "description": "Local IP. Defaults to 127.0.0.1."
+            }
+        }
+    }
 }
