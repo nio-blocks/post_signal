@@ -39,19 +39,38 @@ class TestPostSignal(NIOBlockTestCase):
                              {"in a": "list"})
 
     def test_web_handler_post_error(self):
+        response_headers = MagicMock()
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
                               logger=MagicMock(),
-                              response_headers=MagicMock())
+                              response_headers=response_headers)
         request = MagicMock()
+        response = MagicMock()
         request.get_body.return_value = "I'm just a string :("
-        handler.on_post(request, MagicMock())
+        handler.on_post(request, response)
+        self.assertEqual(response.set_header.call_args_list[0][0][0],
+                         'Access-Control-Allow-Origin')
+        self.assertEqual(response.set_header.call_args_list[0][0][1],
+                         response_headers.return_value.\
+                         access_control_allow_origin.return_value)
         self.assertEqual(len(self.last_notified[DEFAULT_TERMINAL]), 0)
 
     def test_web_handler_options(self):
+        response_headers = MagicMock()
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
                               logger=MagicMock(),
-                              response_headers=MagicMock())
-        handler.on_options(MagicMock(), MagicMock())
+                              response_headers=response_headers)
+        response = MagicMock()
+        handler.on_options(MagicMock(), response)
+        self.assertEqual(response.set_header.call_args_list[0][0][0],
+                         'Access-Control-Allow-Origin')
+        self.assertEqual(response.set_header.call_args_list[0][0][1],
+                         response_headers.return_value.\
+                         access_control_allow_origin.return_value)
+        self.assertEqual(response.set_header.call_args_list[1][0][0],
+                         'Access-Control-Allow-Headers')
+        self.assertEqual(response.set_header.call_args_list[1][0][1],
+                         response_headers.return_value.\
+                         access_control_allow_headers.return_value)
         self.assertEqual(len(self.last_notified[DEFAULT_TERMINAL]), 0)
