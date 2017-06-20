@@ -15,8 +15,10 @@ class BuildSignal(RESTHandler):
         self.response_headers = response_headers
 
     def on_post(self, req, rsp):
-        rsp.set_header('Access-Control-Allow-Origin',
-                       self.response_headers().access_control_allow_origin())
+        self._set_header_if_not_none(
+            rsp,
+            'Access-Control-Allow-Origin',
+            self.response_headers().access_control_allow_origin())
         body = req.get_body()
         if isinstance(body, dict):
             body = [body]
