@@ -16,7 +16,8 @@ class TestPostSignal(NIOBlockTestCase):
     def test_web_handler_post_dict(self):
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
-                              logger=MagicMock())
+                              logger=MagicMock(),
+                              response_headers=MagicMock())
         request = MagicMock()
         request.get_body.return_value = {"I'm a": "dictionary"}
         handler.on_post(request, MagicMock())
@@ -27,7 +28,8 @@ class TestPostSignal(NIOBlockTestCase):
     def test_web_handler_post_list(self):
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
-                              logger=MagicMock())
+                              logger=MagicMock(),
+                              response_headers=MagicMock())
         request = MagicMock()
         request.get_body.return_value = [{"I'm a": "dictionary"},
                                          {"in a": "list"}]
@@ -39,7 +41,8 @@ class TestPostSignal(NIOBlockTestCase):
     def test_web_handler_post_error(self):
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
-                              logger=MagicMock())
+                              logger=MagicMock(),
+                              response_headers=MagicMock())
         request = MagicMock()
         request.get_body.return_value = "I'm just a string :("
         handler.on_post(request, MagicMock())
@@ -48,6 +51,7 @@ class TestPostSignal(NIOBlockTestCase):
     def test_web_handler_options(self):
         handler = BuildSignal(endpoint='',
                               notify_signals=self.notify_signals,
-                              logger=MagicMock())
+                              logger=MagicMock(),
+                              response_headers=MagicMock())
         handler.on_options(MagicMock(), MagicMock())
         self.assertEqual(len(self.last_notified[DEFAULT_TERMINAL]), 0)

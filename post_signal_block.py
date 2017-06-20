@@ -2,7 +2,8 @@ from nio.block.base import Block
 from nio.signal.base import Signal
 from nio.command import command
 from nio.command.params.dict import DictParameter
-from nio.properties import *
+from nio.properties import IntProperty, ObjectProperty, PropertyHolder, \
+    StringProperty
 from nio.modules.web import RESTHandler, WebEngine
 
 
