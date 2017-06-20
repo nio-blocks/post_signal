@@ -31,18 +31,25 @@ class BuildSignal(RESTHandler):
 
     def on_options(self, req, rsp):
         """Handle OPTIONS for CORS requests"""
-        rsp.set_header('Access-Control-Allow-Origin',
-                       self.response_headers().access_control_allow_origin())
-        rsp.set_header('Access-Control-Allow-Headers',
-                       self.response_headers().access_control_allow_headers())
+        self._set_header_if_not_none(
+            rsp,
+            'Access-Control-Allow-Origin',
+            self.response_headers().access_control_allow_origin())
+        self._set_header_if_not_none(
+            rsp,
+            'Access-Control-Allow-Headers',
+            self.response_headers().access_control_allow_headers())
+
+    def _set_header_if_not_none(self, rsp, header_name, header_value):
+        if header_value is not None:
+            rsp.set_header(header_name, header_value)
 
 
 class ResponseHeaders(PropertyHolder):
     access_control_allow_origin = StringProperty(
-        title='Access-Control-Allow-Origin', default='*')
+        title='Access-Control-Allow-Origin', default=None, allow_none=True)
     access_control_allow_headers = StringProperty(
-        title='Access-Control-Allow-Headers',
-        default='Accept, Origin, Content-Type, Authorization')
+        title='Access-Control-Allow-Headers', default=None, allow_none=True)
 
 
 @command("post", DictParameter("signal"))
