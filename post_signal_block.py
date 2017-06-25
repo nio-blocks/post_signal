@@ -3,16 +3,18 @@ from nio.signal.base import Signal
 from nio.command import command
 from nio.command.params.dict import DictParameter
 from nio.properties import IntProperty, ObjectProperty, PropertyHolder, \
-    StringProperty
+    StringProperty, BoolProperty
 from nio.modules.web import RESTHandler, WebEngine
 
 
 class BuildSignal(RESTHandler):
-    def __init__(self, endpoint, notify_signals, logger, response_headers):
+    def __init__(self, endpoint, notify_signals, logger, response_headers,
+                 include_headers=False):
         super().__init__('/'+endpoint)
         self.notify_signals = notify_signals
         self.logger = logger
         self.response_headers = response_headers
+        self.include_headers = include_headers
 
     def on_post(self, req, rsp):
         self._set_header_if_not_none(
@@ -29,6 +31,9 @@ class BuildSignal(RESTHandler):
                 "Invalid JSON in PostSignal request body: {}".format(body))
             return
         signals = [Signal(s) for s in body]
+        if self.include_headers:
+            for signal in signals:
+                signal.headers = req.get_headers()
         self.notify_signals(signals)
 
     def on_options(self, req, rsp):
@@ -62,6 +67,7 @@ class PostSignal(Block):
     endpoint = StringProperty(title='Endpoint', default='')
     response_headers = ObjectProperty(
         ResponseHeaders, title='Response Headers', default=ResponseHeaders())
+    include_headers = BoolProperty(title='Include Headers', default=False)
 
     def __init__(self):
         super().__init__()
@@ -75,7 +81,8 @@ class PostSignal(Block):
             BuildSignal(self.endpoint(),
                         self.notify_signals,
                         self.logger,
-                        self.response_headers),
+                        self.response_headers,
+                        self.include_headers()),
         )
 
     def start(self):
