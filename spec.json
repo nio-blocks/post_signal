@@ -18,7 +18,7 @@
       "include_headers": {
         "title": "Include Headers",
         "type": "BoolType",
-        "description": "",
+        "description": "Whether to include headers on post response",
         "default": false
       },
       "port": {
