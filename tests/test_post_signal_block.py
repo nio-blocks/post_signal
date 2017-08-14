@@ -1,6 +1,8 @@
 from unittest.mock import MagicMock, patch, ANY
+
 from nio.block.terminals import DEFAULT_TERMINAL
 from nio.testing.block_test_case import NIOBlockTestCase
+
 from ..post_signal_block import PostSignal, BuildSignal
 
 
@@ -78,7 +80,7 @@ class TestPostSignal(NIOBlockTestCase):
         self.assertEqual(response.set_header.call_args_list[0][0][0],
                          'Access-Control-Allow-Origin')
         self.assertEqual(response.set_header.call_args_list[0][0][1],
-                         response_headers.return_value.\
+                         response_headers.return_value.
                          access_control_allow_origin.return_value)
         self.assertEqual(len(self.last_notified[DEFAULT_TERMINAL]), 0)
 
@@ -93,11 +95,11 @@ class TestPostSignal(NIOBlockTestCase):
         self.assertEqual(response.set_header.call_args_list[0][0][0],
                          'Access-Control-Allow-Origin')
         self.assertEqual(response.set_header.call_args_list[0][0][1],
-                         response_headers.return_value.\
+                         response_headers.return_value.
                          access_control_allow_origin.return_value)
         self.assertEqual(response.set_header.call_args_list[1][0][0],
                          'Access-Control-Allow-Headers')
         self.assertEqual(response.set_header.call_args_list[1][0][1],
-                         response_headers.return_value.\
+                         response_headers.return_value.
                          access_control_allow_headers.return_value)
         self.assertEqual(len(self.last_notified[DEFAULT_TERMINAL]), 0)

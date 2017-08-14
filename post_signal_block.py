@@ -3,7 +3,7 @@ from nio.signal.base import Signal
 from nio.command import command
 from nio.command.params.dict import DictParameter
 from nio.properties import IntProperty, ObjectProperty, PropertyHolder, \
-    StringProperty, BoolProperty
+    StringProperty, BoolProperty, VersionProperty
 from nio.modules.web import RESTHandler, WebEngine
 
 
@@ -68,6 +68,7 @@ class PostSignal(Block):
     response_headers = ObjectProperty(
         ResponseHeaders, title='Response Headers', default=ResponseHeaders())
     include_headers = BoolProperty(title='Include Headers', default=False)
+    version = VersionProperty("0.1.0")
 
     def __init__(self):
         super().__init__()

@@ -1,10 +1,59 @@
 {
   "nio/PostSignal": {
-    "version": "0.0.1",
-    "description": "",
+    "version": "0.0.0",
+    "description": "Opens up a url endpoint to which you can POST json objects. These will then be output as signals.",
+    "properties": {
+      "endpoint": {
+        "title": "Endpoint",
+        "type": "StringType",
+        "description": "Endpoint at which to accept signals.",
+        "default": ""
+      },
+      "host": {
+        "title": "Host",
+        "type": "StringType",
+        "description": "Local IP. Defaults to 127.0.0.1.",
+        "default": "0.0.0.0"
+      },
+      "include_headers": {
+        "title": "Include Headers",
+        "type": "BoolType",
+        "description": "Whether to include headers on post response",
+        "default": false
+      },
+      "port": {
+        "title": "Port",
+        "type": "IntType",
+        "description": "Port to accept signals on. Defaults to 8182.",
+        "default": 8182
+      },
+      "response_headers": {
+        "title": "Response Headers",
+        "type": "ObjectType",
+        "description": "",
+        "default": {
+          "access_control_allow_origin": null,
+          "access_control_allow_headers": null
+        }
+      }
+    },
     "inputs": {},
-    "outputs": {},
-    "properties": {},
-    "commands": {}
+    "outputs": {
+      "default": {
+        "description": "A new signal for each successful POST to this block."
+      }
+    },
+    "commands": {
+      "post": {
+        "params": {
+          "signal": {
+            "allow_none": false,
+            "default": null,
+            "title": "signal"
+          }
+        },
+        "description": "Notifies a signal from the block immediately, configured with a dictionary parameter."
+      }
+    }
   }
 }
