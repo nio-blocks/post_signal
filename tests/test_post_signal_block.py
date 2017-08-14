@@ -1,6 +1,8 @@
 from unittest.mock import MagicMock, patch, ANY
+
 from nio.block.terminals import DEFAULT_TERMINAL
 from nio.testing.block_test_case import NIOBlockTestCase
+
 from ..post_signal_block import PostSignal, BuildSignal
 
 
