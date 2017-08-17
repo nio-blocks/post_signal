@@ -1,6 +1,6 @@
 {
   "nio/PostSignal": {
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "Opens up a url endpoint to which you can POST json objects. These will then be output as signals.",
     "properties": {
       "endpoint": {
