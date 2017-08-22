@@ -8,6 +8,8 @@ from nio.modules.web import RESTHandler, WebEngine
 
 
 class BuildSignal(RESTHandler):
+    """Deprected on Aug 22, 2017. To be deleted on Nov 1, 2017"""
+
     def __init__(self, endpoint, notify_signals, logger, response_headers,
                  include_headers=False):
         super().__init__('/'+endpoint)
