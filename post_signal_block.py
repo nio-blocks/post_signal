@@ -1,4 +1,4 @@
-from nio.block.base import Block
+from nio import GeneratorBlock
 from nio.signal.base import Signal
 from nio.command import command
 from nio.command.params.dict import DictParameter
@@ -62,7 +62,7 @@ class ResponseHeaders(PropertyHolder):
 
 
 @command("post", DictParameter("signal"))
-class PostSignal(Block):
+class PostSignal(GeneratorBlock):
 
     host = StringProperty(title='Host', default='0.0.0.0')
     port = IntProperty(title='Port', default=8182)
