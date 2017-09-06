@@ -2,6 +2,9 @@
   "nio/PostSignal": {
     "version": "0.1.0",
     "description": "DEPRECATED, USE web_hanlder BLOCKS INSTEAD - Opens up a url endpoint to which you can POST json objects. These will then be output as signals.",
+    "categories": [
+      "Web Data"
+    ],
     "properties": {
       "endpoint": {
         "title": "Endpoint",
